@@ -78,54 +78,140 @@
     }
 
     /* ===== Header (fixed) ===== */
-    .topbar{
-      width:min(96vw,520px);
-      position:relative;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:92px;      /* 托住图标+标题 */
-      margin-bottom:0px;
-    }
-    .brand{
-      position:absolute;
-      left:50%;
-      transform:translateX(-50%);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      text-align:center;
-      max-width:90%;
-    }
-    .logo-icon{
-      font-size:26px;
-      opacity:0.9;
-      margin-bottom:6px;   /* 图标与标题距离 */
-      line-height:1;
-    }
-    .title{
-      font-size:26px;
-      font-weight:900;
-      letter-spacing:.2px;
-      white-space:nowrap; /* 主标题永远一行 */
-      line-height:1.1;
-      text-shadow:0 1px 0 #ffffffd0;
-    }
-    .gear{
-      position:absolute;
-      right:0;
-      top:50%;
-      transform:translateY(-50%);
-      border:0; cursor:pointer; font-size:20px; background:transparent;
-      padding:6px; border-radius:999px;
-    }
-    .sub{
-      font-size:14px;
-      opacity:.75;
-      text-align:center;
-      margin-top:14px;     /* 主副标题距离 */
-      margin-bottom:12px;
-    }
+    /* ===== Header layout ===== */
+.topbar{
+  width:min(96vw,760px);
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  margin: clamp(18px, 4vw, 34px) auto 8px;
+  position: relative;
+}
+
+/* left brand */
+.brand{
+  text-align:center;
+  flex:1;
+  padding: 0 56px; /* 给右上角留空间，防止标题被挤 */
+}
+
+/* wing icon */
+.brand .wing{
+  font-size: clamp(20px, 4vw, 28px);
+  margin-bottom: 6px;
+  animation: floatWing 3.6s ease-in-out infinite;
+  filter: drop-shadow(0 6px 10px rgba(255,180,210,.45));
+}
+
+/* main title: one line + gradient glow */
+.title{
+  margin:0;
+  font-weight: 900;
+  font-size: clamp(20px, 5.2vw, 30px);
+  letter-spacing:.3px;
+  line-height:1.1;
+  white-space: nowrap;          /* 强制一行 */
+  background: linear-gradient(180deg, #5a3f3f 0%, #8a5c6b 55%, #b77a8f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.9),
+    0 8px 22px rgba(255,170,210,0.45),
+    0 0 28px rgba(255,220,240,0.9);
+  animation: angelGlow 4s ease-in-out infinite;
+}
+
+/* subtitle spacing */
+.sub{
+  margin-top: clamp(8px, 2vw, 14px);
+  font-size: clamp(12px, 3.2vw, 15px);
+  opacity:.75;
+}
+
+/* right tools */
+.right-tools{
+  position:absolute;
+  right:0;
+  top:0;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+/* mini theme buttons (emoji) */
+.theme-mini{
+  display:flex; gap:6px;
+  background: rgba(255,255,255,0.55);
+  padding: 4px 6px;
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+.theme-dot{
+  font-size: 14px;
+  width:28px; height:28px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.6);
+  cursor:pointer;
+  transition:.2s ease;
+}
+.theme-dot.active{
+  transform: translateY(-1px) scale(1.05);
+  background: var(--accentSoft);
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px var(--glow);
+}
+
+/* gear: bigger + transparent */
+.gear{
+  font-size: 22px;
+  width:36px; height:36px;
+  display:grid; place-items:center;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.45);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  cursor:pointer;
+  transition:.2s ease;
+}
+.gear:hover{
+  transform: translateY(-1px) rotate(8deg);
+  background: rgba(255,255,255,0.75);
+}
+
+/* ===== Angelic animations ===== */
+@keyframes floatWing{
+  0%,100%{ transform: translateY(0) }
+  50%{ transform: translateY(-6px) }
+}
+@keyframes angelGlow{
+  0%,100%{
+    text-shadow:
+      0 1px 0 rgba(255,255,255,0.9),
+      0 8px 22px rgba(255,170,210,0.35),
+      0 0 26px rgba(255,220,240,0.7);
+  }
+  50%{
+    text-shadow:
+      0 1px 0 rgba(255,255,255,1),
+      0 10px 30px rgba(255,180,220,0.6),
+      0 0 36px rgba(255,235,250,1);
+  }
+}
+
+/* ===== Mobile harmony: more spacing for tabs & card ===== */
+@media (max-width: 480px){
+  .brand{ padding: 0 46px; }
+  .tabs{ margin-top: 6px; margin-bottom: 10px; gap:6px; }
+  .theme-mini{ padding:3px 5px; }
+  .theme-dot{ width:26px; height:26px; font-size:13px; }
+
+  /* 卡片离上方更近一点但不挤 */
+  .card{ margin-top: 6px; }
+}
 
     /* Theme picker small */
     .theme-row{
@@ -325,14 +411,24 @@
 <body data-theme="pink">
 
   <!-- ===== Header ===== -->
-  <div class="topbar">
-    <div class="brand">
-      <div class="logo-icon">🪽</div>
-      <div class="title">Digital Angel Oracle Coach</div>
+  <header class="topbar">
+  <div class="brand">
+    <div class="wing">🪽</div>
+    <h1 class="title">Digital Angel Oracle Coach</h1>
+    <div class="sub">Your daily gentle guidance.</div>
+  </div>
+
+  <!-- 右上角：主题+设置 -->
+  <div class="right-tools">
+    <div class="theme-mini" id="themeRow">
+      <button class="theme-dot" data-theme="pink" aria-label="Pink theme">🌸</button>
+      <button class="theme-dot" data-theme="blue" aria-label="Blue theme">🪽</button>
+      <button class="theme-dot" data-theme="cream" aria-label="Cream theme">✨</button>
     </div>
+
     <button class="gear" id="openSettings" aria-label="Settings">⚙️</button>
   </div>
-  <div class="sub">Your daily gentle guidance.</div>
+</header>
 
   <!-- Theme Picker -->
   <div class="theme-row" id="themeRow">
@@ -677,28 +773,31 @@
 
   /* ===== Theme ===== */
   function wireThemePicker(){
-    const row = document.getElementById("themeRow");
-    row.querySelectorAll(".theme-btn").forEach(btn=>{
-      btn.onclick=()=>{
-        row.querySelectorAll(".theme-btn").forEach(b=>b.classList.remove("active"));
-        btn.classList.add("active");
-        const t = btn.dataset.theme;
-        document.body.setAttribute("data-theme", t);
-        localStorage.setItem(STORAGE.theme, t);
-        const meta = document.querySelector('meta[name="theme-color"]');
-        if(t==="pink") meta.setAttribute("content","#FFEFF7");
-        if(t==="blue") meta.setAttribute("content","#EAF3FF");
-        if(t==="cream") meta.setAttribute("content","#FFF7EF");
-      };
-    });
-  }
+  const row = document.getElementById("themeRow");
+  row.querySelectorAll(".theme-dot").forEach(btn=>{
+    btn.onclick=()=>{
+      row.querySelectorAll(".theme-dot").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const t = btn.dataset.theme;
+      document.body.setAttribute("data-theme", t);
+      localStorage.setItem(STORAGE.theme, t);
+
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if(t==="pink") meta.setAttribute("content","#FFEFF7");
+      if(t==="blue") meta.setAttribute("content","#EAF3FF");
+      if(t==="cream") meta.setAttribute("content","#FFF7EF");
+    };
+  });
+}
   function restoreTheme(){
-    const t = localStorage.getItem(STORAGE.theme) || "pink";
-    document.body.setAttribute("data-theme", t);
-    document.querySelectorAll(".theme-btn").forEach(b=>{
-      b.classList.toggle("active", b.dataset.theme===t);
-    });
-  }
+  const t = localStorage.getItem(STORAGE.theme) || "pink";
+  document.body.setAttribute("data-theme", t);
+  document.querySelectorAll(".theme-dot").forEach(b=>{
+    b.classList.toggle("active", b.dataset.theme===t);
+  });
+}
+
 
   /* ===== Card Back Custom ===== */
   function restoreBackImage(){
