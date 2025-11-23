@@ -6,9 +6,6 @@
   <title>Digital Angel Oracle Coach</title>
 
   <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="icons/icon-192.png">
-  <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
-
   <meta name="theme-color" content="#FFEFF7">
 
   <style>
@@ -26,6 +23,11 @@
       --hint:#b45c74;
       --shadow:rgba(0,0,0,0.12);
       --glow:rgba(255,145,180,.30);
+
+      /* ✅ FIX: orbit distance vars */
+      --orbitX:200px;
+      --orbitYTop:-40px;
+      --orbitYBot:170px;
     }
 
     /* ===== Themes ===== */
@@ -73,186 +75,146 @@
         radial-gradient(820px circle at 50% 0%, #ffffffc8 0%, transparent 60%),
         linear-gradient(180deg,var(--bg1),var(--bg2));
       display:flex; flex-direction:column; align-items:center;
-      padding:18px 12px 38px; color:var(--ink); overflow-x:hidden;
+      padding:18px 12px 34px; color:var(--ink); overflow-x:hidden;
       transition:background .5s ease, color .3s ease;
+      position:relative;
     }
 
-    /* ===== Header (fixed) ===== */
-    /* ===== Header layout ===== */
-.topbar{
-  width:min(96vw,760px);
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  margin: clamp(18px, 4vw, 34px) auto 8px;
-  position: relative;
-}
-
-/* left brand */
-.brand{
-  text-align:center;
-  flex:1;
-  padding: 0 56px; /* 给右上角留空间，防止标题被挤 */
-}
-
-/* wing icon */
-.brand .wing{
-  font-size: clamp(20px, 4vw, 28px);
-  margin-bottom: 6px;
-  animation: floatWing 3.6s ease-in-out infinite;
-  filter: drop-shadow(0 6px 10px rgba(255,180,210,.45));
-}
-
-/* main title: one line + gradient glow */
-.title{
-  margin:0;
-  font-weight: 900;
-  font-size: clamp(20px, 5.2vw, 30px);
-  letter-spacing:.3px;
-  line-height:1.1;
-  white-space: nowrap;          /* 强制一行 */
-  background: linear-gradient(180deg, #5a3f3f 0%, #8a5c6b 55%, #b77a8f 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow:
-    0 1px 0 rgba(255,255,255,0.9),
-    0 8px 22px rgba(255,170,210,0.45),
-    0 0 28px rgba(255,220,240,0.9);
-  animation: angelGlow 4s ease-in-out infinite;
-}
-
-/* subtitle spacing */
-.sub{
-  margin-top: clamp(8px, 2vw, 14px);
-  font-size: clamp(12px, 3.2vw, 15px);
-  opacity:.75;
-}
-
-/* right tools */
-.right-tools{
-  position:absolute;
-  right:0;
-  top:0;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-/* mini theme buttons (emoji) */
-.theme-mini{
-  display:flex; gap:6px;
-  background: rgba(255,255,255,0.55);
-  padding: 4px 6px;
-  border-radius: 999px;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
-}
-.theme-dot{
-  font-size: 14px;
-  width:28px; height:28px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,0.9);
-  background: rgba(255,255,255,0.6);
-  cursor:pointer;
-  transition:.2s ease;
-}
-.theme-dot.active{
-  transform: translateY(-1px) scale(1.05);
-  background: var(--accentSoft);
-  border-color: var(--accent);
-  box-shadow: 0 4px 12px var(--glow);
-}
-
-/* gear: bigger + transparent */
-.gear{
-  font-size: 22px;
-  width:36px; height:36px;
-  display:grid; place-items:center;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,0.8);
-  background: rgba(255,255,255,0.45);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-  cursor:pointer;
-  transition:.2s ease;
-}
-.gear:hover{
-  transform: translateY(-1px) rotate(8deg);
-  background: rgba(255,255,255,0.75);
-}
-
-/* ===== Angelic animations ===== */
-@keyframes floatWing{
-  0%,100%{ transform: translateY(0) }
-  50%{ transform: translateY(-6px) }
-}
-@keyframes angelGlow{
-  0%,100%{
-    text-shadow:
-      0 1px 0 rgba(255,255,255,0.9),
-      0 8px 22px rgba(255,170,210,0.35),
-      0 0 26px rgba(255,220,240,0.7);
-  }
-  50%{
-    text-shadow:
-      0 1px 0 rgba(255,255,255,1),
-      0 10px 30px rgba(255,180,220,0.6),
-      0 0 36px rgba(255,235,250,1);
-  }
-}
-
-/* ===== Mobile harmony: more spacing for tabs & card ===== */
-@media (max-width: 480px){
-  .brand{ padding: 0 46px; }
-  .tabs{ margin-top: 6px; margin-bottom: 10px; gap:6px; }
-  .theme-mini{ padding:3px 5px; }
-  .theme-dot{ width:26px; height:26px; font-size:13px; }
-
-  /* 卡片离上方更近一点但不挤 */
-  .card{ margin-top: 6px; }
-}
-
-    /* Theme picker small */
-    .theme-row{
-      display:flex; gap:7px; margin:6px 0 12px; flex-wrap:wrap; justify-content:center;
+    /* ===== Floating angel layer ===== */
+    .float-angel-layer{
+      position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;
     }
-    .theme-btn{
-      padding:6px 11px; border-radius:999px; font-size:12px; font-weight:800; cursor:pointer;
-      background:#ffffffd9; border:1px solid #ffffff90; box-shadow:0 3px 10px rgba(0,0,0,0.08);
-      transition:.2s; user-select:none;
+    .float-angel{
+      position:absolute;
+      font-size:18px;
+      opacity:.35;
+      filter: drop-shadow(0 6px 12px rgba(255,170,200,.35));
+      animation: floatUp var(--dur,18s) linear infinite;
+      left: var(--x,50%);
+      top: var(--y,100%);
     }
-    .theme-btn.active{
-      background:var(--accentSoft); border-color:var(--accent);
-      box-shadow:0 4px 14px var(--glow);
+    @keyframes floatUp{
+      0%{ transform:translateY(0) translateX(0) rotate(0deg); opacity:0; }
+      10%{ opacity:.35; }
+      100%{ transform:translateY(-130vh) translateX(30px) rotate(14deg); opacity:0; }
+    }
+
+    /* Header */
+    .topbar{
+      width:min(96vw,520px);
+      display:flex; align-items:center; justify-content:center;
+      margin:6px 0 4px;
+      position:relative;
+      z-index:2;
+    }
+
+    /* Title breathing gradient */
+    .title{
+      font-weight:900;
+      letter-spacing:.5px;
+      line-height:1.1;
+      font-size:clamp(26px,4vw,36px);
+      text-align:center;
+      white-space:nowrap;
+
+      background: linear-gradient(90deg,#6b3d4a,#ff9fc7,#ffd9a8,#6b3d4a);
+      background-size:220% 100%;
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+
+      filter:
+        drop-shadow(0 1px 0 #fff)
+        drop-shadow(0 10px 28px rgba(255,150,190,.45));
+
+      animation:titleBreath 5.5s ease-in-out infinite;
+    }
+    @keyframes titleBreath{
+      0%,100%{ background-position:0% 50%; transform:translateY(0); opacity:.92; }
+      50%{ background-position:100% 50%; transform:translateY(-2px); opacity:1; }
+    }
+
+    .sub{
+      font-size:13px; opacity:.78; margin:2px 0 12px;
+      text-align:center;
+      z-index:2;
+    }
+
+    /* Settings + theme emoji pills (top-right floating) */
+    .right-tools{
+      position:fixed; top:14px; right:12px; z-index:5;
+      display:flex; align-items:center; gap:8px;
+    }
+    .theme-pills{
+      display:flex; gap:6px; padding:6px 8px;
+      background:#ffffffd9; border-radius:999px;
+      box-shadow:0 6px 16px rgba(0,0,0,0.08);
+      border:1px solid #ffffffb0;
+      backdrop-filter: blur(6px);
+    }
+    .theme-pill{
+      width:30px; height:30px; border-radius:999px; border:0;
+      display:grid; place-items:center; cursor:pointer;
+      font-size:16px; background:transparent;
+      transition:.2s;
+    }
+    .theme-pill.active{
+      background:var(--accentSoft);
+      box-shadow:0 4px 12px var(--glow);
+    }
+    .gear{
+      border:0; cursor:pointer; font-size:19px; background:#ffffffd9;
+      width:36px; height:36px; border-radius:999px;
+      box-shadow:0 6px 16px rgba(0,0,0,0.08);
+      border:1px solid #ffffffb0;
     }
 
     /* Tabs */
-    .tabs{display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; justify-content:center;}
+    .tabs{
+      display:flex; gap:8px; margin-bottom:14px;
+      flex-wrap:wrap; justify-content:center;
+      z-index:2;
+    }
     .tab{
-      padding:6px 12px; background:#ffffffd9; border-radius:999px; font-weight:700; font-size:12px;
-      cursor:pointer; box-shadow:0 3px 10px rgba(0,0,0,0.08); border:1px solid #ffffff80; transition:.2s;
-      user-select:none;
+      padding:6px 12px; background:#ffffffd9; border-radius:999px;
+      font-weight:700; font-size:12px;
+      cursor:pointer; box-shadow:0 3px 10px rgba(0,0,0,0.08);
+      border:1px solid #ffffff80; transition:.2s; user-select:none;
     }
     .tab.active{
       background:var(--accentSoft); border-color:var(--accent);
       box-shadow:0 4px 14px var(--glow);
     }
 
+    /* ✅ FIX: wrap card so orbit buttons are OUTSIDE clipping */
+    .card-wrap{
+      position:relative;
+      width:var(--cardW);
+      aspect-ratio:3/5;
+      z-index:2;
+      overflow:visible; /* allow orbit buttons to float outside */
+    }
+
     /* Card */
     .card{
-      width:var(--cardW); aspect-ratio:3/5; border-radius:32px; overflow:hidden; background:#fff;
-      position:relative; display:flex; align-items:center; justify-content:center;
+      width:100%;
+      height:100%;
+      border-radius:32px;
+      overflow:hidden; /* keep image clipped */
+      background:#fff;
+      position:relative;
+      display:flex; align-items:center; justify-content:center;
       box-shadow:0 20px 40px var(--shadow);
       transition:transform .35s ease, box-shadow .35s ease;
     }
     .card img{width:100%; height:100%; object-fit:cover;}
+
     .card.pop{
       transform:translateY(-5px) scale(1.01);
       box-shadow:0 26px 56px var(--glow);
     }
 
-    /* Base sparkle (lighter) */
+    /* Sparkle */
     .sparkle{
       position:absolute; inset:0; pointer-events:none; opacity:0;
       background:
@@ -268,7 +230,7 @@
       100%{opacity:0; transform:scale(1.01);}
     }
 
-    /* Micro-events overlays (subtle) */
+    /* ✅ FIX: bring back micro-event layers */
     .event{ position:absolute; inset:0; pointer-events:none; opacity:0; }
     .event.money{
       background:
@@ -300,10 +262,12 @@
       100%{opacity:0; transform:scale(1.02);}
     }
 
-    /* Prompt box (float, less border) */
+    /* Prompt box */
     .prompt-box{
-      position:absolute; top:8%; width:86%; background:var(--cream); padding:14px 16px;
-      border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.10);
+      position:absolute; top:8%; width:86%;
+      background:var(--cream); padding:14px 16px;
+      border-radius:20px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.10);
       border:1.5px solid color-mix(in srgb, var(--accent) 35%, transparent);
       animation:fadeIn .55s ease;
       backdrop-filter: blur(6px);
@@ -313,9 +277,18 @@
       to{opacity:1; transform:translateY(0);}
     }
 
-    .summary{ font-size:11.5px; font-weight:900; letter-spacing:.06em; text-transform:uppercase; opacity:.78; margin-bottom:6px; display:flex; align-items:center; gap:6px; }
-    .prompt-text{font-size:15.5px; line-height:1.6; white-space:pre-line; font-weight:800;}
-    .prompt-meta{margin-top:6px; font-size:11px; opacity:.65; letter-spacing:.08em; text-transform:uppercase;}
+    .summary{
+      font-size:11.5px; font-weight:900; letter-spacing:.06em;
+      text-transform:uppercase; opacity:.78; margin-bottom:6px;
+      display:flex; align-items:center; gap:6px;
+    }
+    .prompt-text{
+      font-size:15.5px; line-height:1.6; white-space:pre-line; font-weight:800;
+    }
+    .prompt-meta{
+      margin-top:6px; font-size:11px; opacity:.65;
+      letter-spacing:.08em; text-transform:uppercase;
+    }
 
     .energy-row{margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;}
     .chip{
@@ -339,25 +312,70 @@
       display:flex; align-items:center; gap:6px;
     }
 
-    /* Buttons minimal row */
-    .btns{
-      display:flex; gap:8px; justify-content:center; margin-top:14px; flex-wrap:wrap;
+    /* ===== Orbit buttons around card ===== */
+    .orbit-btns{
+      position:absolute; inset:0; pointer-events:none; overflow:visible;
     }
-    button.main{
-      padding:10px 16px; border-radius:22px; border:0;
-      background:var(--cream);
-      font-size:14px; font-weight:900; cursor:pointer;
-      box-shadow:0 6px 14px rgba(0,0,0,0.08);
-      border:1px solid #ffffffa0;
-      transition:.2s; user-select:none;
+    .orbit-btn{
+      pointer-events:auto;
+      position:absolute; left:50%; top:50%;
+      transform:translate(-50%,-50%) translate(var(--ox),var(--oy));
+      width:76px; height:76px; border-radius:999px; border:0;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      gap:4px;
+      font-weight:900; font-size:11px;
+      box-shadow:0 10px 26px var(--shadow);
+      border:1px solid #ffffffcc;
+      backdrop-filter: blur(6px);
+      transition:.2s;
     }
-    button.main:hover{transform:translateY(-1px); background:white;}
-    .ghost{font-weight:800; font-size:12px; opacity:.9}
-    .disabled{opacity:.55; pointer-events:none;}
+    .orbit-btn .ico{ font-size:20px; line-height:1; }
+    .orbit-btn .lab{ font-size:11px; letter-spacing:.02em; }
+
+    /* ✅ FIX: use CSS offsets, not inline, so mobile can scale */
+    .orbit-btn.draw{ --ox:calc(-1 * var(--orbitX)); --oy:var(--orbitYTop); }
+    .orbit-btn.clarify{ --ox:var(--orbitX); --oy:var(--orbitYTop); }
+    .orbit-btn.save{ --ox:calc(-1 * var(--orbitX)); --oy:var(--orbitYBot); }
+    .orbit-btn.journal{ --ox:var(--orbitX); --oy:var(--orbitYBot); }
+
+    .orbit-btn.draw{
+      background:linear-gradient(180deg,#fff,#ffe9f4);
+      color:#6b3d4a;
+    }
+    .orbit-btn.clarify{
+      background:linear-gradient(180deg,#fff,#e9f1ff);
+      color:#34485a;
+    }
+    .orbit-btn.save{
+      background:linear-gradient(180deg,#fff,#fff3d9);
+      color:#7a5b2b;
+    }
+    .orbit-btn.journal{
+      background:linear-gradient(180deg,#fff,#efe9ff);
+      color:#4f3f7a;
+    }
+
+    .orbit-btn:hover{
+      transform:translate(-50%,-50%) translate(var(--ox),var(--oy)) scale(1.06);
+    }
+
+    @media (max-width:480px){
+      :root{
+        --orbitX:120px;
+        --orbitYTop:-20px;
+        --orbitYBot:130px;
+      }
+      .orbit-btn{ width:64px; height:64px; font-size:10px; }
+      .orbit-btn .ico{ font-size:18px; }
+      .orbit-btn .lab{ font-size:10px; }
+      .title{ white-space:normal; }
+    }
 
     .footer{
-      margin-top:10px; font-size:11px; opacity:.55; text-align:center;
+      margin-top:12px; font-size:11px; opacity:.55; text-align:center;
       max-width:520px; line-height:1.4;
+      z-index:2;
     }
 
     /* ===== Modal base ===== */
@@ -410,74 +428,86 @@
 
 <body data-theme="pink">
 
-  <!-- ===== Header ===== -->
-  <header class="topbar">
-  <div class="brand">
-    <div class="wing">🪽</div>
-    <h1 class="title">Digital Angel Oracle Coach</h1>
-    <div class="sub">Your daily gentle guidance.</div>
+  <!-- floating angels -->
+  <div class="float-angel-layer" aria-hidden="true">
+    <span class="float-angel" style="--x:8%;  --y:105%; --dur:50s;">🪽</span>
+    <span class="float-angel" style="--x:24%; --y:110%; --dur:60s;">👼</span>
+    <span class="float-angel" style="--x:52%; --y:108%; --dur:30s;">🪽</span>
+    <span class="float-angel" style="--x:70%; --y:112%; --dur:40s;">👼</span>
+    <span class="float-angel" style="--x:88%; --y:106%; --dur:30s;">🪽</span>
   </div>
 
-  <!-- 右上角：主题+设置 -->
+  <!-- right tools -->
   <div class="right-tools">
-    <div class="theme-mini" id="themeRow">
-      <button class="theme-dot" data-theme="pink" aria-label="Pink theme">🌸</button>
-      <button class="theme-dot" data-theme="blue" aria-label="Blue theme">🪽</button>
-      <button class="theme-dot" data-theme="cream" aria-label="Cream theme">✨</button>
+    <div class="theme-pills" id="themeRow">
+      <button class="theme-pill" data-theme="pink" aria-label="Pink theme">🌸</button>
+      <button class="theme-pill" data-theme="blue" aria-label="Blue theme">🪽</button>
+      <button class="theme-pill" data-theme="cream" aria-label="Cream theme">✨</button>
     </div>
-
     <button class="gear" id="openSettings" aria-label="Settings">⚙️</button>
   </div>
-</header>
 
-  <!-- Theme Picker -->
-  <div class="theme-row" id="themeRow">
-    <div class="theme-btn" data-theme="pink">🌸 Pink</div>
-    <div class="theme-btn" data-theme="blue">🪽 Blue</div>
-    <div class="theme-btn" data-theme="cream">✨ Cream</div>
+  <div class="topbar">
+    <div class="title">Digital Angel Oracle Coach</div>
   </div>
+  <div class="sub">Your daily gentle guidance.</div>
 
   <!-- Category Tabs -->
   <div class="tabs" id="tabs"></div>
 
-  <div class="card" id="card">
-    <img id="cardBackImg" src="cards/back.png" alt="">
-    <div class="sparkle" id="sparkle"></div>
-    <div class="event" id="eventLayer"></div>
+  <!-- ✅ FIX: card-wrap added -->
+  <div class="card-wrap" id="cardWrap">
 
-    <div class="prompt-box" id="promptBox">
-      <div class="summary">
-        <span>✨</span>
-        <span id="summaryText">Today’s Guidance will appear here.</span>
-      </div>
+    <div class="card" id="card">
+      <img id="cardBackImg" src="cards/back.png" alt="">
+      <div class="sparkle" id="sparkle"></div>
+      <div class="event" id="eventLayer"></div>
 
-      <div class="prompt-text" id="promptText">Tap “Draw” to begin.</div>
-      <div class="prompt-meta" id="promptMeta"></div>
+      <!-- Prompt float box -->
+      <div class="prompt-box" id="promptBox">
+        <div class="summary">
+          <span>✨</span>
+          <span id="summaryText">Today’s Guidance will appear here.</span>
+        </div>
 
-      <div class="energy-row" id="energyRow"></div>
+        <div class="prompt-text" id="promptText">Tap “Draw” to begin.</div>
+        <div class="prompt-meta" id="promptMeta"></div>
 
-      <div class="section" id="actionBox" style="display:none;">
-        <div class="section-title">Action Step</div>
-        <div id="actionText"></div>
-      </div>
+        <div class="energy-row" id="energyRow"></div>
 
-      <div class="section" id="affBox" style="display:none;">
-        <div class="section-title">Affirmation</div>
-        <div id="affText"></div>
-      </div>
+        <div class="section" id="actionBox" style="display:none;">
+          <div class="section-title">Action Step</div>
+          <div id="actionText"></div>
+        </div>
 
-      <div class="hint">
-        <span>🌟</span>
-        <span id="hintText">Today's Hint will appear here.</span>
+        <div class="section" id="affBox" style="display:none;">
+          <div class="section-title">Affirmation</div>
+          <div id="affText"></div>
+        </div>
+
+        <div class="hint">
+          <span>🌟</span>
+          <span id="hintText">Today's Hint will appear here.</span>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="btns">
-    <button class="main" id="drawBtn">Draw</button>
-    <button class="main ghost" id="clarifyBtn">Clarify</button>
-    <button class="main" id="saveBtn">Save ♥</button>
-    <button class="main ghost" id="journalBtn">Journal ✨</button>
+    <!-- Orbit buttons with labels -->
+    <div class="orbit-btns" aria-label="Actions">
+      <button class="orbit-btn draw" id="drawBtn">
+        <span class="ico">🪄</span><span class="lab">Draw</span>
+      </button>
+      <button class="orbit-btn clarify" id="clarifyBtn">
+        <span class="ico">✨</span><span class="lab">Clarify</span>
+      </button>
+      <button class="orbit-btn save" id="saveBtn">
+        <span class="ico">💗</span><span class="lab">Save</span>
+      </button>
+      <button class="orbit-btn journal" id="journalBtn">
+        <span class="ico">📜</span><span class="lab">Journal</span>
+      </button>
+    </div>
+
   </div>
 
   <div class="footer">
@@ -762,42 +792,40 @@
   }
   function setDailyUI(locked){
     const drawBtn = document.getElementById("drawBtn");
+    const lab = drawBtn.querySelector(".lab"); /* ✅ FIX */
     if(locked){
-      drawBtn.classList.add("disabled");
-      drawBtn.textContent = "Draw (tomorrow)";
+      drawBtn.style.opacity = ".55";
+      if(lab) lab.textContent = "Draw (tomorrow)";
     }else{
-      drawBtn.classList.remove("disabled");
-      drawBtn.textContent = "Draw";
+      drawBtn.style.opacity = "1";
+      if(lab) lab.textContent = "Draw";
     }
   }
 
   /* ===== Theme ===== */
   function wireThemePicker(){
-  const row = document.getElementById("themeRow");
-  row.querySelectorAll(".theme-dot").forEach(btn=>{
-    btn.onclick=()=>{
-      row.querySelectorAll(".theme-dot").forEach(b=>b.classList.remove("active"));
-      btn.classList.add("active");
-
-      const t = btn.dataset.theme;
-      document.body.setAttribute("data-theme", t);
-      localStorage.setItem(STORAGE.theme, t);
-
-      const meta = document.querySelector('meta[name="theme-color"]');
-      if(t==="pink") meta.setAttribute("content","#FFEFF7");
-      if(t==="blue") meta.setAttribute("content","#EAF3FF");
-      if(t==="cream") meta.setAttribute("content","#FFF7EF");
-    };
-  });
-}
+    const row = document.getElementById("themeRow");
+    row.querySelectorAll(".theme-pill").forEach(btn=>{
+      btn.onclick=()=>{
+        row.querySelectorAll(".theme-pill").forEach(b=>b.classList.remove("active"));
+        btn.classList.add("active");
+        const t = btn.dataset.theme;
+        document.body.setAttribute("data-theme", t);
+        localStorage.setItem(STORAGE.theme, t);
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if(t==="pink") meta.setAttribute("content","#FFEFF7");
+        if(t==="blue") meta.setAttribute("content","#EAF3FF");
+        if(t==="cream") meta.setAttribute("content","#FFF7EF");
+      };
+    });
+  }
   function restoreTheme(){
-  const t = localStorage.getItem(STORAGE.theme) || "pink";
-  document.body.setAttribute("data-theme", t);
-  document.querySelectorAll(".theme-dot").forEach(b=>{
-    b.classList.toggle("active", b.dataset.theme===t);
-  });
-}
-
+    const t = localStorage.getItem(STORAGE.theme) || "pink";
+    document.body.setAttribute("data-theme", t);
+    document.querySelectorAll(".theme-pill").forEach(b=>{
+      b.classList.toggle("active", b.dataset.theme===t);
+    });
+  }
 
   /* ===== Card Back Custom ===== */
   function restoreBackImage(){
@@ -910,8 +938,8 @@
 
     saveBtn.onclick = ()=>{
       const ok = saveEntry();
-      saveBtn.textContent = ok ? "Saved!" : "Draw first";
-      setTimeout(()=>saveBtn.textContent="Save ♥", 900);
+      saveBtn.querySelector(".lab").textContent = ok ? "Saved!" : "Draw first";
+      setTimeout(()=>saveBtn.querySelector(".lab").textContent="Save", 900);
     };
 
     journalBtn.onclick = ()=>{
@@ -955,6 +983,7 @@
     document.getElementById("resetBtn").onclick=resetScreen;
   }
 
+  // main buttons
   document.getElementById("drawBtn").onclick=()=>{
     if(isDailyLocked()) return;
     drawPrompt(false);
