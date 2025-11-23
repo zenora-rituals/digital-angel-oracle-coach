@@ -24,7 +24,7 @@
       --shadow:rgba(0,0,0,0.12);
       --glow:rgba(255,145,180,.30);
 
-      /* ✅ FIX: orbit distance vars */
+      /* orbit distance vars */
       --orbitX:200px;
       --orbitYTop:-40px;
       --orbitYBot:170px;
@@ -140,35 +140,6 @@
       z-index:2;
     }
 
-    /* Settings + theme emoji pills (top-right floating) */
-    .right-tools{
-      position:fixed; top:14px; right:12px; z-index:5;
-      display:flex; align-items:center; gap:8px;
-    }
-    .theme-pills{
-      display:flex; gap:6px; padding:6px 8px;
-      background:#ffffffd9; border-radius:999px;
-      box-shadow:0 6px 16px rgba(0,0,0,0.08);
-      border:1px solid #ffffffb0;
-      backdrop-filter: blur(6px);
-    }
-    .theme-pill{
-      width:30px; height:30px; border-radius:999px; border:0;
-      display:grid; place-items:center; cursor:pointer;
-      font-size:16px; background:transparent;
-      transition:.2s;
-    }
-    .theme-pill.active{
-      background:var(--accentSoft);
-      box-shadow:0 4px 12px var(--glow);
-    }
-    .gear{
-      border:0; cursor:pointer; font-size:19px; background:#ffffffd9;
-      width:36px; height:36px; border-radius:999px;
-      box-shadow:0 6px 16px rgba(0,0,0,0.08);
-      border:1px solid #ffffffb0;
-    }
-
     /* Tabs */
     .tabs{
       display:flex; gap:8px; margin-bottom:14px;
@@ -186,21 +157,20 @@
       box-shadow:0 4px 14px var(--glow);
     }
 
-    /* ✅ FIX: wrap card so orbit buttons are OUTSIDE clipping */
+    /* card-wrap so orbit buttons float outside */
     .card-wrap{
       position:relative;
       width:var(--cardW);
       aspect-ratio:3/5;
       z-index:2;
-      overflow:visible; /* allow orbit buttons to float outside */
+      overflow:visible;
     }
 
-    /* Card */
     .card{
       width:100%;
       height:100%;
       border-radius:32px;
-      overflow:hidden; /* keep image clipped */
+      overflow:hidden;
       background:#fff;
       position:relative;
       display:flex; align-items:center; justify-content:center;
@@ -214,7 +184,6 @@
       box-shadow:0 26px 56px var(--glow);
     }
 
-    /* Sparkle */
     .sparkle{
       position:absolute; inset:0; pointer-events:none; opacity:0;
       background:
@@ -230,7 +199,6 @@
       100%{opacity:0; transform:scale(1.01);}
     }
 
-    /* ✅ FIX: bring back micro-event layers */
     .event{ position:absolute; inset:0; pointer-events:none; opacity:0; }
     .event.money{
       background:
@@ -262,7 +230,6 @@
       100%{opacity:0; transform:scale(1.02);}
     }
 
-    /* Prompt box */
     .prompt-box{
       position:absolute; top:8%; width:86%;
       background:var(--cream); padding:14px 16px;
@@ -312,7 +279,7 @@
       display:flex; align-items:center; gap:6px;
     }
 
-    /* ===== Orbit buttons around card ===== */
+    /* Orbit buttons around card */
     .orbit-btns{
       position:absolute; inset:0; pointer-events:none; overflow:visible;
     }
@@ -333,7 +300,6 @@
     .orbit-btn .ico{ font-size:20px; line-height:1; }
     .orbit-btn .lab{ font-size:11px; letter-spacing:.02em; }
 
-    /* ✅ FIX: use CSS offsets, not inline, so mobile can scale */
     .orbit-btn.draw{ --ox:calc(-1 * var(--orbitX)); --oy:var(--orbitYTop); }
     .orbit-btn.clarify{ --ox:var(--orbitX); --oy:var(--orbitYTop); }
     .orbit-btn.save{ --ox:calc(-1 * var(--orbitX)); --oy:var(--orbitYBot); }
@@ -355,7 +321,6 @@
       background:linear-gradient(180deg,#fff,#efe9ff);
       color:#4f3f7a;
     }
-
     .orbit-btn:hover{
       transform:translate(-50%,-50%) translate(var(--ox),var(--oy)) scale(1.06);
     }
@@ -424,23 +389,52 @@
     .setting-title{font-weight:900;}
     .small-muted{font-size:12px; opacity:.7;}
 
-    /* --- MOBILE FIX: prevent theme & settings row overlapping title --- */
+    /* ===== NEW: Expandable FAB menu (bottom-right) ===== */
+    .fab-menu{
+      position:fixed;
+      right:14px;
+      bottom:14px;
+      z-index:9999;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:8px;
+      pointer-events:auto;
+    }
+    .fab-toggle{
+      width:46px;height:46px;border-radius:999px;border:0;
+      background:#ffffffd9;
+      box-shadow:0 6px 18px rgba(0,0,0,0.10);
+      display:grid;place-items:center;
+      font-size:20px;cursor:pointer;
+      backdrop-filter: blur(8px);
+      transition:.2s;
+    }
+    .fab-toggle:hover{transform:scale(1.07);}
 
-@media (max-width: 480px) {
-  .theme-and-settings {
-    transform: scale(0.85);      /* 整体缩小一点 */
-    top: 6px !important;         /* 往上收紧，不压住标题 */
-    right: 8px !important;
-  }
-
-  .theme-button, .settings-button {
-    margin: 0 2px !important;    /* 按钮之间更紧凑 */
-  }
-
-  h1 {
-    margin-top: 60px !important; /* 给标题更多空间 */
-  }
-}
+    .fab-items{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      transform:translateY(8px);
+      opacity:0;
+      pointer-events:none;
+      transition:.25s ease;
+    }
+    .fab-menu.open .fab-items{
+      transform:translateY(0);
+      opacity:1;
+      pointer-events:auto;
+    }
+    .fab-item{
+      width:40px;height:40px;border-radius:999px;border:0;
+      background:#fff;
+      box-shadow:0 4px 14px rgba(0,0,0,0.10);
+      display:grid;place-items:center;
+      font-size:18px;cursor:pointer;
+      transition:.2s;
+    }
+    .fab-item:hover{transform:scale(1.08);}
   </style>
 </head>
 
@@ -455,16 +449,6 @@
     <span class="float-angel" style="--x:88%; --y:106%; --dur:30s;">🪽</span>
   </div>
 
-  <!-- right tools -->
-  <div class="right-tools">
-    <div class="theme-pills" id="themeRow">
-      <button class="theme-pill" data-theme="pink" aria-label="Pink theme">🌸</button>
-      <button class="theme-pill" data-theme="blue" aria-label="Blue theme">🪽</button>
-      <button class="theme-pill" data-theme="cream" aria-label="Cream theme">✨</button>
-    </div>
-    <button class="gear" id="openSettings" aria-label="Settings">⚙️</button>
-  </div>
-
   <div class="topbar">
     <div class="title">Digital Angel Oracle Coach</div>
   </div>
@@ -473,15 +457,12 @@
   <!-- Category Tabs -->
   <div class="tabs" id="tabs"></div>
 
-  <!-- ✅ FIX: card-wrap added -->
   <div class="card-wrap" id="cardWrap">
-
     <div class="card" id="card">
       <img id="cardBackImg" src="cards/back.png" alt="">
       <div class="sparkle" id="sparkle"></div>
       <div class="event" id="eventLayer"></div>
 
-      <!-- Prompt float box -->
       <div class="prompt-box" id="promptBox">
         <div class="summary">
           <span>✨</span>
@@ -510,7 +491,6 @@
       </div>
     </div>
 
-    <!-- Orbit buttons with labels -->
     <div class="orbit-btns" aria-label="Actions">
       <button class="orbit-btn draw" id="drawBtn">
         <span class="ico">🪄</span><span class="lab">Draw</span>
@@ -525,7 +505,6 @@
         <span class="ico">📜</span><span class="lab">Journal</span>
       </button>
     </div>
-
   </div>
 
   <div class="footer">
@@ -601,7 +580,17 @@
         </div>
         <button class="tiny-btn" id="resetBtn">Reset</button>
       </div>
+    </div>
+  </div>
 
+  <!-- ✅ NEW: FAB expandable theme + settings menu -->
+  <div class="fab-menu" id="fabMenu" aria-label="Theme & Settings">
+    <button class="fab-toggle" id="fabToggle" title="Theme & Settings">✨</button>
+    <div class="fab-items">
+      <button class="fab-item" data-theme="pink" title="Pink theme">🌸</button>
+      <button class="fab-item" data-theme="blue" title="Blue theme">🪽</button>
+      <button class="fab-item" data-theme="cream" title="Cream theme">✨</button>
+      <button class="fab-item" id="openSettings" title="Settings">⚙️</button>
     </div>
   </div>
 
@@ -648,11 +637,22 @@
 
   function random(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 
+  /* ✅ NEW: setTheme used by FAB buttons */
+  function setTheme(t){
+    document.body.setAttribute("data-theme", t);
+    localStorage.setItem(STORAGE.theme, t);
+
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if(t==="pink") meta.setAttribute("content","#FFEFF7");
+    if(t==="blue") meta.setAttribute("content","#EAF3FF");
+    if(t==="cream") meta.setAttribute("content","#FFF7EF");
+  }
+
   async function init(){
     const res = await fetch("prompts.json");
     prompts = await res.json();
     renderTabs();
-    wireThemePicker();
+    wireFABMenu();
     wireJournalUI();
     wireSettingsUI();
     restoreTheme();
@@ -810,7 +810,7 @@
   }
   function setDailyUI(locked){
     const drawBtn = document.getElementById("drawBtn");
-    const lab = drawBtn.querySelector(".lab"); /* ✅ FIX */
+    const lab = drawBtn.querySelector(".lab");
     if(locked){
       drawBtn.style.opacity = ".55";
       if(lab) lab.textContent = "Draw (tomorrow)";
@@ -820,29 +820,10 @@
     }
   }
 
-  /* ===== Theme ===== */
-  function wireThemePicker(){
-    const row = document.getElementById("themeRow");
-    row.querySelectorAll(".theme-pill").forEach(btn=>{
-      btn.onclick=()=>{
-        row.querySelectorAll(".theme-pill").forEach(b=>b.classList.remove("active"));
-        btn.classList.add("active");
-        const t = btn.dataset.theme;
-        document.body.setAttribute("data-theme", t);
-        localStorage.setItem(STORAGE.theme, t);
-        const meta = document.querySelector('meta[name="theme-color"]');
-        if(t==="pink") meta.setAttribute("content","#FFEFF7");
-        if(t==="blue") meta.setAttribute("content","#EAF3FF");
-        if(t==="cream") meta.setAttribute("content","#FFF7EF");
-      };
-    });
-  }
+  /* ===== Theme restore ===== */
   function restoreTheme(){
     const t = localStorage.getItem(STORAGE.theme) || "pink";
-    document.body.setAttribute("data-theme", t);
-    document.querySelectorAll(".theme-pill").forEach(b=>{
-      b.classList.toggle("active", b.dataset.theme===t);
-    });
+    setTheme(t);
   }
 
   /* ===== Card Back Custom ===== */
@@ -976,7 +957,10 @@
   /* ===== Settings UI ===== */
   function wireSettingsUI(){
     const modal = document.getElementById("settingsModal");
-    document.getElementById("openSettings").onclick = ()=> modal.style.display="flex";
+    const openSettingsBtn = document.getElementById("openSettings");
+    if(openSettingsBtn){
+      openSettingsBtn.onclick = ()=> modal.style.display="flex";
+    }
     document.getElementById("closeSettings").onclick= ()=> modal.style.display="none";
     modal.onclick = (e)=>{ if(e.target===modal) modal.style.display="none"; };
 
@@ -1001,7 +985,25 @@
     document.getElementById("resetBtn").onclick=resetScreen;
   }
 
-  // main buttons
+  /* ✅ NEW: FAB open/close + theme click */
+  function wireFABMenu(){
+    const menu = document.getElementById("fabMenu");
+    const toggle = document.getElementById("fabToggle");
+    toggle.onclick = ()=> menu.classList.toggle("open");
+
+    menu.querySelectorAll(".fab-item[data-theme]").forEach(btn=>{
+      btn.onclick = ()=>{
+        setTheme(btn.dataset.theme);
+        menu.classList.remove("open");
+      };
+    });
+
+    // click outside to close
+    document.addEventListener("click",(e)=>{
+      if(!menu.contains(e.target)) menu.classList.remove("open");
+    });
+  }
+
   document.getElementById("drawBtn").onclick=()=>{
     if(isDailyLocked()) return;
     drawPrompt(false);
