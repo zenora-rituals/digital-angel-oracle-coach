@@ -362,7 +362,7 @@
 
     @media (max-width:480px){
       :root{
-        --orbitX:150px;
+        --orbitX:180px;
         --orbitYTop:-20px;
         --orbitYBot:130px;
       }
@@ -424,20 +424,21 @@
     .setting-title{font-weight:900;}
     .small-muted{font-size:12px; opacity:.7;}
 
-    @media (max-width: 480px) {
+    /* --- MOBILE FIX: prevent theme & settings row overlapping title --- */
+
+@media (max-width: 480px) {
   .theme-and-settings {
-    position: fixed;
-    top: 12px;
-    right: 12px;
-    z-index: 2000;
-    background: rgba(255,255,255,0.4);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 6px 10px;
+    transform: scale(0.85);      /* 整体缩小一点 */
+    top: 6px !important;         /* 往上收紧，不压住标题 */
+    right: 8px !important;
+  }
+
+  .theme-button, .settings-button {
+    margin: 0 2px !important;    /* 按钮之间更紧凑 */
   }
 
   h1 {
-    margin-top: 80px !important;
+    margin-top: 60px !important; /* 给标题更多空间 */
   }
 }
   </style>
