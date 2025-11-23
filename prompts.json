@@ -1,0 +1,406 @@
+[
+  {
+    "id": 1,
+    "category": "Money",
+    "text": "Today, act as if abundance is already yours. What would you choose differently?",
+    "energy": ["Receiving", "Trust", "Glow-Up"],
+    "action": "Pick one tiny choice you’d make from abundance (even a $1 upgrade) and do it with a grateful heart.",
+    "affirmation": "Abundance feels safe and natural for me."
+  },
+  {
+    "id": 2,
+    "category": "Money",
+    "text": "Release one scarcity thought and replace it with a softer truth.",
+    "energy": ["Release", "Soft Power"],
+    "action": "Write your scarcity thought on paper, then rewrite it as a kinder belief and keep the new one visible today.",
+    "affirmation": "There is more than enough for me."
+  },
+  {
+    "id": 3,
+    "category": "Money",
+    "text": "Your wealth expands when your nervous system feels safe.",
+    "energy": ["Safety", "Expansion", "Calm"],
+    "action": "Do a 2-minute belly-breath and say, “I’m safe to receive.” Notice any softness in your body.",
+    "affirmation": "Money comes to me in gentle, supportive ways."
+  },
+  {
+    "id": 4,
+    "category": "Money",
+    "text": "Let money be your friend, not your test.",
+    "energy": ["Friendship", "Ease"],
+    "action": "Thank money for one thing it helped you with recently, even if it was small.",
+    "affirmation": "Money and I are on the same team."
+  },
+  {
+    "id": 5,
+    "category": "Money",
+    "text": "Raise your standards with love, not pressure.",
+    "energy": ["Standards", "Self-Worth"],
+    "action": "Choose one area of your life to “upgrade gently” today—time, space, or habits.",
+    "affirmation": "I deserve beautiful support."
+  },
+  {
+    "id": 6,
+    "category": "Money",
+    "text": "Abundance loves clarity. Decide what you want.",
+    "energy": ["Clarity", "Direction"],
+    "action": "Write one clear money desire in a single sentence, then read it out loud once.",
+    "affirmation": "My desires are safe to name."
+  },
+  {
+    "id": 7,
+    "category": "Money",
+    "text": "Circulation invites more circulation.",
+    "energy": ["Flow", "Generosity"],
+    "action": "Tip, donate, or share something small today and say “This returns to me multiplied.”",
+    "affirmation": "I live in a generous, flowing universe."
+  },
+  {
+    "id": 8,
+    "category": "Money",
+    "text": "Let it be easy. Let it be yours.",
+    "energy": ["Ease", "Belonging"],
+    "action": "Notice one place you’re over-trying. Do it 10% easier today.",
+    "affirmation": "Ease is my frequency."
+  },
+  {
+    "id": 9,
+    "category": "Money",
+    "text": "Stop negotiating with your worth.",
+    "energy": ["Worthiness", "Boundaries"],
+    "action": "Practice saying “That works for me” once today, even in a small situation.",
+    "affirmation": "My worth is non-negotiable."
+  },
+  {
+    "id": 10,
+    "category": "Money",
+    "text": "Your next level is asking for consistency, not perfection.",
+    "energy": ["Consistency", "Momentum"],
+    "action": "Do one tiny money-aligned action you can repeat tomorrow (save $1, list a product, send a pitch).",
+    "affirmation": "Small steps create big timelines."
+  },
+
+  {
+    "id": 11,
+    "category": "Love",
+    "text": "Let love meet you where you are, not where you think you should be.",
+    "energy": ["Acceptance", "Gentleness"],
+    "action": "Place a hand on your heart and say, “I’m lovable here and now.”",
+    "affirmation": "Love finds me in my real life."
+  },
+  {
+    "id": 12,
+    "category": "Love",
+    "text": "Your softness is magnetic.",
+    "energy": ["Softness", "Magnetism"],
+    "action": "Do one soft thing for yourself today—slow tea, warm shower, a quiet walk.",
+    "affirmation": "My softness is my superpower."
+  },
+  {
+    "id": 13,
+    "category": "Love",
+    "text": "Release one old story about love. It is not your truth anymore.",
+    "energy": ["Release", "New Story"],
+    "action": "Write the old story, then cross it out and write the new story underneath.",
+    "affirmation": "I choose love that feels safe and bright."
+  },
+  {
+    "id": 14,
+    "category": "Love",
+    "text": "Act from self-respect today. Love multiplies in aligned choices.",
+    "energy": ["Self-Respect", "Alignment"],
+    "action": "Say yes to one thing that honors you, and no to one thing that doesn’t.",
+    "affirmation": "I attract love that matches my standards."
+  },
+  {
+    "id": 15,
+    "category": "Love",
+    "text": "Open your heart without leaving your boundaries behind.",
+    "energy": ["Open Heart", "Healthy Boundaries"],
+    "action": "Name one boundary that actually protects your tenderness.",
+    "affirmation": "My heart is open and protected."
+  },
+  {
+    "id": 16,
+    "category": "Love",
+    "text": "Choose the version of you that feels loved first.",
+    "energy": ["Self-Love", "Embodiment"],
+    "action": "Dress, speak, or move today like someone who is deeply loved.",
+    "affirmation": "I am the love I seek."
+  },
+  {
+    "id": 17,
+    "category": "Love",
+    "text": "Trust your timing. Love cannot miss you.",
+    "energy": ["Timing", "Faith"],
+    "action": "Repeat: “What is for me will arrive gently.”",
+    "affirmation": "Love is on its way, perfectly timed."
+  },
+  {
+    "id": 18,
+    "category": "Love",
+    "text": "Let your nervous system learn that intimacy is safe.",
+    "energy": ["Safety", "Intimacy"],
+    "action": "Do one grounding thing before connecting with others—breath, stretch, or a sip of water.",
+    "affirmation": "It is safe for me to be close and true."
+  },
+  {
+    "id": 19,
+    "category": "Love",
+    "text": "Speak to yourself the way your soulmate would.",
+    "energy": ["Kindness", "Inner Voice"],
+    "action": "Write one sweet sentence to yourself and read it aloud.",
+    "affirmation": "I am spoken to with love, starting by me."
+  },
+  {
+    "id": 20,
+    "category": "Love",
+    "text": "Romance begins with how you treat your own heart.",
+    "energy": ["Romance", "Care"],
+    "action": "Plan one tiny romantic moment for yourself today.",
+    "affirmation": "My life is allowed to feel tender."
+  },
+
+  {
+    "id": 21,
+    "category": "Self",
+    "text": "You are allowed to want more. Desire is a compass.",
+    "energy": ["Desire", "Direction"],
+    "action": "Write one desire you’ve been shrinking. Give it space.",
+    "affirmation": "My desires are wise and welcome."
+  },
+  {
+    "id": 22,
+    "category": "Self",
+    "text": "Say no to one thing that drains you.",
+    "energy": ["Boundaries", "Energy Care"],
+    "action": "Choose one small “no” today and feel your energy return.",
+    "affirmation": "I protect my energy with love."
+  },
+  {
+    "id": 23,
+    "category": "Self",
+    "text": "Your future self is already proud.",
+    "energy": ["Future You", "Courage"],
+    "action": "Do one 5-minute action your future self would thank you for.",
+    "affirmation": "I’m becoming someone I trust."
+  },
+  {
+    "id": 24,
+    "category": "Self",
+    "text": "Stop waiting for permission. You are the permission.",
+    "energy": ["Permission", "Boldness"],
+    "action": "Take one tiny step you’ve been “waiting to be ready for.”",
+    "affirmation": "I am allowed to begin."
+  },
+  {
+    "id": 25,
+    "category": "Self",
+    "text": "Choose ease over proving.",
+    "energy": ["Ease", "Self-Compassion"],
+    "action": "Ask: “If this were easy, how would I do it?” Then try that.",
+    "affirmation": "I don’t need to suffer to succeed."
+  },
+  {
+    "id": 26,
+    "category": "Self",
+    "text": "Your confidence grows when you keep promises to yourself.",
+    "energy": ["Integrity", "Confidence"],
+    "action": "Make one tiny promise today—and keep it.",
+    "affirmation": "I trust myself more every day."
+  },
+  {
+    "id": 27,
+    "category": "Self",
+    "text": "Let your identity upgrade. You don’t need to stay who you were.",
+    "energy": ["Upgrade", "New Timeline"],
+    "action": "Pick one habit or thought that belongs to the old you and gently retire it today.",
+    "affirmation": "I welcome my next version."
+  },
+  {
+    "id": 28,
+    "category": "Self",
+    "text": "What feels light, true, and inevitable? Follow that.",
+    "energy": ["Lightness", "Truth"],
+    "action": "Say yes to one light thing today, even if it’s small.",
+    "affirmation": "My path feels lighter as I trust it."
+  },
+  {
+    "id": 29,
+    "category": "Self",
+    "text": "You don’t have to do it all at once.",
+    "energy": ["Pacing", "Gentle Momentum"],
+    "action": "Choose the next single step only. Let that be enough.",
+    "affirmation": "I move at the speed of my soul."
+  },
+  {
+    "id": 30,
+    "category": "Self",
+    "text": "Your sensitivity is not a weakness. It’s an instrument of truth.",
+    "energy": ["Sensitivity", "Truth"],
+    "action": "Notice one moment today where your sensitivity guided you well.",
+    "affirmation": "My sensitivity is a gift."
+  },
+
+  {
+    "id": 31,
+    "category": "Healing",
+    "text": "Rest is productive in a healing timeline.",
+    "energy": ["Rest", "Nourishment"],
+    "action": "Give yourself a 10-minute zero-pressure rest window today.",
+    "affirmation": "Rest repairs me in magical ways."
+  },
+  {
+    "id": 32,
+    "category": "Healing",
+    "text": "Let emotions move through you like waves, not walls.",
+    "energy": ["Flow", "Emotional Release"],
+    "action": "Name your feeling out loud once. Let it exist without fixing it.",
+    "affirmation": "My feelings are safe to feel."
+  },
+  {
+    "id": 33,
+    "category": "Healing",
+    "text": "You do not need to be perfect to be whole.",
+    "energy": ["Wholeness", "Self-Kindness"],
+    "action": "Write one thing you forgive yourself for today.",
+    "affirmation": "I am whole exactly as I am."
+  },
+  {
+    "id": 34,
+    "category": "Healing",
+    "text": "Your body is listening. Speak to it with kinder words.",
+    "energy": ["Body Love", "Gentle Care"],
+    "action": "Say one loving sentence to your body while looking in the mirror.",
+    "affirmation": "My body and I are friends."
+  },
+  {
+    "id": 35,
+    "category": "Healing",
+    "text": "Healing is an expansion, not a race.",
+    "energy": ["Expansion", "Patience"],
+    "action": "Do one healing thing slowly today—half the speed, double the softness.",
+    "affirmation": "I heal at my perfect pace."
+  },
+  {
+    "id": 36,
+    "category": "Healing",
+    "text": "Release what is not yours to carry.",
+    "energy": ["Release", "Lightness"],
+    "action": "Visualize handing one burden to the universe. Exhale as you let it go.",
+    "affirmation": "I only carry what belongs to me."
+  },
+  {
+    "id": 37,
+    "category": "Healing",
+    "text": "Let your inner child feel safe today.",
+    "energy": ["Inner Child", "Safety"],
+    "action": "Do one tiny playful thing you loved as a kid.",
+    "affirmation": "I am safe, loved, and supported."
+  },
+  {
+    "id": 38,
+    "category": "Healing",
+    "text": "Your heart knows how to mend softly.",
+    "energy": ["Heart Healing", "Tenderness"],
+    "action": "Place your palm on your chest and breathe into warmth for 60 seconds.",
+    "affirmation": "My heart is gently restoring itself."
+  },
+  {
+    "id": 39,
+    "category": "Healing",
+    "text": "Choose one nourishing ritual and do it slowly.",
+    "energy": ["Ritual", "Nourish"],
+    "action": "Pick a ritual (tea, skincare, stretching) and do it with full presence.",
+    "affirmation": "I deserve to be cared for."
+  },
+  {
+    "id": 40,
+    "category": "Healing",
+    "text": "You are allowed to feel better than before.",
+    "energy": ["Hope", "Renewal"],
+    "action": "Name one small sign that you’re healing, and celebrate it.",
+    "affirmation": "Feeling better is safe for me."
+  },
+
+  {
+    "id": 41,
+    "category": "All",
+    "text": "You are being guided. Trust the gentle pull.",
+    "energy": ["Guidance", "Trust"],
+    "action": "Notice one subtle sign today—repeat numbers, a song, a feeling. Smile at it.",
+    "affirmation": "I am lovingly guided."
+  },
+  {
+    "id": 42,
+    "category": "All",
+    "text": "Everything that is for you is moving toward you.",
+    "energy": ["Inevitable Good", "Alignment"],
+    "action": "Write “It’s already on its way” and keep it on your phone lock screen today.",
+    "affirmation": "What’s meant for me cannot miss me."
+  },
+  {
+    "id": 43,
+    "category": "All",
+    "text": "Act in alignment, then release control.",
+    "energy": ["Alignment", "Surrender"],
+    "action": "Take one aligned step, then do something relaxing to signal trust.",
+    "affirmation": "I do my part and the universe meets me."
+  },
+  {
+    "id": 44,
+    "category": "All",
+    "text": "Your energy sets the rules. Set them with love.",
+    "energy": ["Energy Hygiene", "Leadership"],
+    "action": "Decide one energetic rule today (e.g., no doom-scrolling before noon).",
+    "affirmation": "My energy is mine to lead."
+  },
+  {
+    "id": 45,
+    "category": "All",
+    "text": "Today is a portal. Step through it consciously.",
+    "energy": ["New Timeline", "Presence"],
+    "action": "Choose one moment today to pause, breathe, and say “I choose this timeline.”",
+    "affirmation": "I step into my best timeline daily."
+  },
+  {
+    "id": 46,
+    "category": "All",
+    "text": "The universe responds faster to certainty than effort.",
+    "energy": ["Certainty", "Faith"],
+    "action": "Speak one desire as a certainty: “This is happening for me.”",
+    "affirmation": "I trust my yes."
+  },
+  {
+    "id": 47,
+    "category": "All",
+    "text": "What you water grows. Focus on what you want to amplify.",
+    "energy": ["Focus", "Growth"],
+    "action": "Name one thing going right, and give it your attention for 30 seconds.",
+    "affirmation": "I grow what I love."
+  },
+  {
+    "id": 48,
+    "category": "All",
+    "text": "Be gentle with your timing. You are blooming.",
+    "energy": ["Gentleness", "Blooming"],
+    "action": "Do one small thing that supports your bloom today.",
+    "affirmation": "I am unfolding beautifully."
+  },
+  {
+    "id": 49,
+    "category": "All",
+    "text": "You are safe to receive.",
+    "energy": ["Receiving", "Safety"],
+    "action": "When something good appears today, whisper “yes, thank you.”",
+    "affirmation": "I receive with an open, calm heart."
+  },
+  {
+    "id": 50,
+    "category": "All",
+    "text": "Choose the timeline that feels most alive.",
+    "energy": ["Aliveness", "Choice"],
+    "action": "Ask: “Which choice makes me feel more alive?” Then follow that.",
+    "affirmation": "My aliveness is my compass."
+  }
+]
